@@ -2,8 +2,7 @@ require 'rails_helper'
 include RandomData
 RSpec.describe AdvertisementsController, type: :controller do
   let (:my_ad) do
-  	Advertisement.create!(
-  		id: 1, 
+  	Advertisement.create!( 
   		title: RandomData.random_sentence,
   		copy: RandomData.random_paragraph,
   		price: 99
@@ -22,6 +21,28 @@ RSpec.describe AdvertisementsController, type: :controller do
   	end
 	end
 
+	describe "ADVERTISEMENT create" do
+    it "increases the number of Advertisement by 1" do
+      expect{post :create, 
+      	advertisement: {
+      		title: RandomData.random_sentence, 
+      		copy: RandomData.random_paragraph,
+      		price: 99
+      	}}.to change(Advertisement,:count).by(1)
+    end
+      		
+ 
+    it "assigns the new advertisement to @advertisement" do
+      post :create, advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 99}
+      expect(assigns(:advertisement)).to eq Advertisement.last
+    end
+ 
+    it "redirects to the new advertisement" do
+      post :create, advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 99}
+      expect(response).to redirect_to Advertisement.last
+    end
+  end
+
 		describe "GET #show" do
 			it "returns http success" do 
 				get :show, {id: my_ad.id}
@@ -30,7 +51,7 @@ RSpec.describe AdvertisementsController, type: :controller do
 
 			it "renders the show view" do
 				get :show, {id: my_ad.id}
-				expect(response).to render_template(:success)
+				expect(response).to render_template(:show)
 			end
 
 			it "assigns my_ad to @advertisement" do
