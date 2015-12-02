@@ -13,9 +13,10 @@ group :development do
 	#gem 'pry-rails'
 end
 
- group :development, :test do
-   gem 'rspec-rails', '~> 3.0'
- end
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
