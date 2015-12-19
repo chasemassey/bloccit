@@ -9,11 +9,20 @@ include RandomData
 end
 users = User.all
 
-user = User.first
-  user.update_attributes!(
-    email: 'chasemassey@gmail.com',
-    password: 'football2005'
-  )
+# Create an admin user
+admin = User.create!(
+  name:     'Admin User',
+  email:    'admin@example.com',
+  password: 'helloworld',
+  role:     'admin'
+ )
+ 
+# Create a member
+member = User.create!(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld'
+ )
 
 # Create Topics
 15.times do
