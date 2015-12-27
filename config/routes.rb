@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'ratings/show'
+
+  get 'ratings/edit'
+
+  get 'ratings/new'
+
+  get 'ratings/show'
+
+  resources :labels, only: [:show]
+
   resources :topics do
     resources :posts, except: [:index]
   end
