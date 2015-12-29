@@ -1,5 +1,4 @@
 class Label < ActiveRecord::Base
-	has_many :labelings
 
   has_many :topics, through: :labelings, source: :labelable, source_type: :Topic
 

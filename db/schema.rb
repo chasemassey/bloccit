@@ -24,23 +24,6 @@ ActiveRecord::Schema.define(version: 20151228000504) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
-  create_table "labelings", force: :cascade do |t|
-    t.integer  "label_id"
-    t.integer  "labelable_id"
-    t.string   "labelable_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
-  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
-
-  create_table "labels", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -48,27 +31,11 @@ ActiveRecord::Schema.define(version: 20151228000504) do
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
     t.integer  "user_id"
-    t.integer  "rating"
     t.float    "rank"
   end
 
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
-
-  create_table "ratings", force: :cascade do |t|
-    t.integer  "severity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "topic_id"
-  end
-
-  create_table "sponsored_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -76,7 +43,6 @@ ActiveRecord::Schema.define(version: 20151228000504) do
     t.text     "description"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "rating"
   end
 
   create_table "users", force: :cascade do |t|
