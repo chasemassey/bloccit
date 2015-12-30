@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     else
       flash[:error] = "There was an error creating your account. Please try again."
       render :new
-      #Change to 'flash.now[:alert] ='?
     end
   end
 
