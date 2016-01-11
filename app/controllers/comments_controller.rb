@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.find(params[:id])
 
     if @comment.destroy
-      flash[:notie] = "Comment was deleted."
+      flash[:notice] = "Comment was deleted."
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
     end
