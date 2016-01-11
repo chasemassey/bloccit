@@ -4,9 +4,9 @@
       <br />
       <% avatar_url = @user.avatar_url(128) %>
       <% if avatar_url %>
-          <div class="media-left">
-            <%= image_tag avatar_url, class: 'media-object' %>
-          </div>
+        <div class="media-left">
+          <%= image_tag avatar_url, class: 'media-object' %>
+        </div>
       <% end %>
       <div class="media-body">
         <h2 class="media-heading"><%= @user.name %></h2>
@@ -18,20 +18,9 @@
     </div>
   </div>
 </div>
+
 <h2>Posts</h2>
-<% if @user.has_posts? %>
-    <%= render @user.posts %>
-<% else %>
-    <div class="media">
-      <%= link_to current_user.name, user_path(current_user) %> has not submitted any posts yet.
-    </div>
-<% end %>
+<%= render @user.posts %>
 
 <h2>Comments</h2>
-<% if @user.has_comments? %>
-    <%= render @user.comments %>
-<% else %>
-    <div class="media">
-      <%= link_to current_user.name, user_path(current_user) %> has not submitted any comments yet.
-    </div>
-<% end %>
+<%= render @user.comments %>
