@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
+
     post '/up-vote' => 'votes#up_vote', as: :up_vote
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
@@ -24,7 +25,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
-      resources :topics, except: [:edit, :new]
+      resources :topics, except: [:edit, :new] do
+        post '/create_post' => 'topics#create_post', as: :create_post
+      end
+
+      resources :posts, only: [:index, :show, :create, :update, :destroy] do
+        resources :comments, only: [:index, :show]
+        resources :votes, only: [:index, :show]
+        resources :favorites, only: [:index, :show]
+      end
     end
   end
 end
