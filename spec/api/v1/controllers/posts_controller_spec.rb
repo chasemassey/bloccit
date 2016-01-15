@@ -66,15 +66,16 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   context "authenticated and authorized users" do
     before do
       my_user.admin!
-      controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
+      controller.request.env['HTTP_AUTHORIZATION'] = 
+      ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
       @new_post = build(:post)
     end
 
     describe "PUT update" do
-      before { put :update, topic_id: my_topic.id, id: my_post.id }
+      before { put :update, topic_id: my_topic.id, 
+        id: my_post.id, post: {title: "Sweet Title"} }
 
       it "returns http success" do
-        p @new_post
         expect(response).to have_http_status(:success)
       end
 
@@ -89,7 +90,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     end
 
     describe "POST create" do
-      before { post :create, topic_id: my_topic.id, post: {title: @new_post.title, body: @new_post.body} }
+      before { post :create, topic_id: my_topic.id, post: 
+        {title: @new_post.title, body: @new_post.body} }
 
       it "returns http success" do
         expect(response).to have_http_status(:success)
